@@ -12,7 +12,8 @@ import java.io.Serializable
     REGISTER,
     LOGIN,
     ACCOUNT_BEHAVIOR_DONE,
-    LOGOUT;
+    LOGOUT,
+    LOGOUT_DONE;
 
     var extra: AppResult<Object, AppError>? = null
     fun addExtra(extra: AppResult<Object, AppError>? = null) : AppAction {

@@ -6,6 +6,7 @@ import com.tony.reduxkotlinsample.state.dataflow.AppError
 import com.tony.reduxkotlinsample.state.dataflow.AppState
 import com.tony.reduxkotlinsample.state.dataflow.command.AppCommand
 import com.tony.reduxkotlinsample.state.dataflow.command.LoginAppCommand
+import com.tony.reduxkotlinsample.state.dataflow.command.LogoutAppCommand
 import com.tony.reduxkotlinsample.state.dataflow.command.RegisterAppCommand
 
 /**
@@ -51,6 +52,10 @@ class AccountReducer {
                     }
                 }
                 AppAction.LOGOUT -> {
+                    state.accountRequesting = false
+                    command = LogoutAppCommand()
+                }
+                AppAction.LOGOUT_DONE -> {
                     state.user = null
                 }
             }

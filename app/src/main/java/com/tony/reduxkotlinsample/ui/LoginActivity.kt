@@ -39,6 +39,10 @@ class LoginActivity : BaseActivity() {
             val password = et_password!!.text.toString().trim()
             AppContext.store.dispatch(AppAction.LOGIN.addExtra(AppResult(Pair(username, password) as Object)))
         }
+
+        findViewById<Button>(R.id.bt_logout).setOnClickListener {
+            AppContext.store.dispatch(AppAction.LOGOUT)
+        }
     }
 
     override fun onChangedState(action: AppAction, state: AppState) {
@@ -55,6 +59,18 @@ class LoginActivity : BaseActivity() {
                         Toast.makeText(this, "登录成功！", Toast.LENGTH_SHORT).show()
                         tv_userinfo?.text = "用户信息：${user}"
                     }
+                }
+            }
+            AppAction.LOGOUT_DONE -> {
+                if (action.extra != null) {
+                    if (action.extra!!.failure != null) {
+                        val error = action.extra!!.failure
+                        Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show()
+                        tv_userinfo?.text = "退出登录：$error"
+                    }
+                } else {
+                    Toast.makeText(this, "登录成功！", Toast.LENGTH_SHORT).show()
+                    tv_userinfo?.text = "退出成功"
                 }
             }
         }
